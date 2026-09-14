@@ -67,7 +67,7 @@ HANGMAN_PICS = [
     """
 ]
 
-# Predefined list of 5 words (Task Requirement: 5 predefined words)
+# Predefined list of 5 words (as per task specifications)
 WORDS = ["python", "codealpha", "developer", "internship", "programming"]
 
 MAX_INCORRECT_GUESSES = 6
@@ -93,10 +93,10 @@ def display_game_status(secret_word, guessed_letters, incorrect_guesses):
 
 def play_hangman():
     """Main game function to run a round of Hangman."""
-    # Key Concept: random selection from a list
+    # Concept: random selection from a list
     secret_word = random.choice(WORDS).lower()
     
-    # Key Concepts: lists and strings for state tracking
+    # Concept: lists and strings for state tracking
     guessed_letters = []
     incorrect_guesses = 0
     
@@ -106,18 +106,14 @@ def play_hangman():
     print(f"I have chosen a word with {len(secret_word)} letters.")
     print(f"You are allowed up to {MAX_INCORRECT_GUESSES} incorrect guesses. Good luck!\n")
     
-    # Key Concept: while loop for game progression
+    # Concept: while loop for game progression
     while incorrect_guesses < MAX_INCORRECT_GUESSES:
         display_game_status(secret_word, guessed_letters, incorrect_guesses)
         
-        # Key Concept: console input
-        try:
-            guess = input("Enter a letter to guess: ").strip().lower()
-        except (EOFError, KeyboardInterrupt):
-            print("\nGame interrupted. Exiting round.")
-            return
+        # Concept: input handling
+        guess = input("Enter a letter to guess: ").strip().lower()
         
-        # Key Concept: if-else statements for validation & game logic
+        # Concept: if-else statements for validation & game logic
         if len(guess) != 1 or not guess.isalpha():
             print("\n>> Invalid input! Please enter a single alphabetical letter.\n")
             continue
@@ -155,16 +151,14 @@ def main():
     try:
         while True:
             play_hangman()
-            try:
-                replay = input("Do you want to play again? (y/n): ").strip().lower()
-            except (EOFError, KeyboardInterrupt):
-                break
+            replay = input("Do you want to play again? (y/n): ").strip().lower()
             if replay != 'y':
-                print("\nThank you for playing CodeAlpha Hangman! Goodbye!\n")
+                print("\nThank you for playing! Goodbye!\n")
                 break
-    except KeyboardInterrupt:
-        print("\n\nGoodbye!")
+    except (KeyboardInterrupt, EOFError):
+        print("\n\nGame exited. Thank you for playing!\n")
 
 
 if __name__ == "__main__":
     main()
+
